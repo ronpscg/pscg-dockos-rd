@@ -1,0 +1,12 @@
+FROM scratch
+WORKDIR /
+# Note: we also have the modules here and we don't need them, but let them stay, sure, why not
+# Note: we can use remote contexts, but the idea is to be simple, and enable one to setup the environment, and the respective binaries for the initial initrd-fs from 
+#       a build they entirely control, this enabling them to rebuild a ramdisk, and recopy the binaries for whatever architecture they choose, without using different mechanisms
+COPY initrd-fs/usr /usr
+COPY initrd-fs/bin /bin
+COPY initrd-fs/sbin /sbin
+
+# We could copy trivial-init.sh. I chose to bind-mount it, so that it can be modified without rebuilding the docker
+#COPY trivial-init.sh /
+
